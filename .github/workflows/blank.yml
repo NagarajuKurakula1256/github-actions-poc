@@ -1,0 +1,13 @@
+name: my first workflow
+on: push
+jobs:
+  my-first-job:
+      runs-on: windows-latest
+      steps:
+         - run: echo "Hello first job"
+
+  my-second-job:
+       runs-on: windows-latest
+       steps:
+          - run: echo "Hello second job"
+
