@@ -7,7 +7,7 @@ jobs:
         - name: Display Information
           run: |
             echo "event_name: ${{github.event_name}}"
-            echo "Event : ${{github.repository_owner}}"
+            echo "Repo owner : ${{github.repository_owner}}"
 
             echo "Ref: ${{github.Ref}}"
             echo "Repo URL: ${{github.repositoryUrl}}"
