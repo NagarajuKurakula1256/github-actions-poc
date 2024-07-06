@@ -14,13 +14,13 @@ jobs:
           run: |
            echo  "Triggered by: ${{github.event_name}}"
 
-           echo "Branch: ${{github.branch}}"
+           echo "Branch: ${{github.base_ref}}"
 
            echo "Commit SHA: ${{github.sha}}"
 
-           echo "Runner OS: ${{github.OS}}"
+           echo "Runner OS: $RUNNER_OS"
         - name: "[debug] Print when triggered from main"
-          if: ${{inputs.debug}}==true && ${{github.branch}}=="main"
+          if: ${{inputs.debug}}==true && ${{github.base_ref}}=="main"
           run: echo "I was triggered from main"
         - name: Third steps
           run: echo "Hello, world"
