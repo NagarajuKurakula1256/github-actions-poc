@@ -11,6 +11,7 @@ jobs:
                 echo "action : ${{github.action}}"
                 echo "action path : ${{github.action_path}}"
                 echo "action reference ${{github.action_ref}}"
+                echo "SHA : ${{github.sha}}"
     windows-echo:
         runs-on: windows-latest
         steps:
