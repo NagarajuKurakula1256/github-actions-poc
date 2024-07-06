@@ -1,4 +1,5 @@
-name: 07 - Using Expressions
+name: "07 - Using Expressions"
+run-name: 07 - Using Expressions | DEBUG - ${{ inputs.debug && 'ON' || 'OFF' }}
 on: 
     workflow_dispatch:
      inputs:
@@ -20,7 +21,7 @@ jobs:
 
            echo "Runner OS: $RUNNER_OS"
         - name: "[debug] Print when triggered from main"
-          if: inputs.debug == true && github.ref=='refs/heads/main'
+          if: inputs.debug == true && ${{github.ref}}=='refs/heads/main'
           run: echo "I was triggered from main"
         - name: Third step
           run: echo "Hello, world"
