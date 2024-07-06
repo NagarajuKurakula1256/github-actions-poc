@@ -1,7 +1,7 @@
 name: 07 - Using Expressions
 on: 
     workflow_dispatch:
-    inputs:
+     inputs:
         debug:
           type: boolean
           default: false
@@ -10,8 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
         - name: "[debug] Print start-up data"
-         if: ${{inputs.debug}}==true
-         run: |
+          if: ${{ inputs.debug }}==true
+          run: |
            echo  "Triggered by: ${{github.event_name}}"
 
            echo "Branch: ${{github.branch}}"
