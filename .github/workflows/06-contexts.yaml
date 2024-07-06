@@ -1,5 +1,6 @@
 name: 06 - Contexts
 on: push
+run-name: "My custom workflow run name - ${{runner.OS}}"
 jobs:
   echo-data:
     runs-on: ubuntu-latest
@@ -21,6 +22,6 @@ jobs:
 
             echo "Run ID: ${{github.run_id}}"
 
-            echo "Run number: ${{github.run_number}}"
+            echo "Run number: ${{github.run_id}}"
         - name: Retrieve Variable
           run: echo "MY_VAR value is ${{vars.MY_VAR}}"
