@@ -20,9 +20,9 @@ jobs:
 
            echo "Runner OS: $RUNNER_OS"
         - name: "[debug] Print when triggered from main"
-          if: ${{inputs.debug}}==true && ${{github.base_ref}}=="main"
+          if: ${{inputs.debug}}==true && ${{github.ref}}=="refs/heads/main"
           run: echo "I was triggered from main"
-        - name: Third steps
+        - name: Third step
           run: echo "Hello, world"
 
 
