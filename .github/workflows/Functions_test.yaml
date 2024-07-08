@@ -1,17 +1,46 @@
-name: build
-on: workflow_dispatch
+# See 08-variables/README.md for more information
+# about the how to use variables in GitHub Actions.
+
+name: 09 - Using Functions_1
+
+on:
+  # workflow_dispatch:
+    pull_request:
+
+
 jobs:
-  job1:
+  echo1:
     runs-on: ubuntu-latest
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+   
     steps:
-      - id: set-matrix
-        run: echo "matrix={\"include\":[{\"project\":\"foo\",\"config\":\"Debug\"},{\"project\":\"bar\",\"config\":\"Release\"}]}" >> $GITHUB_OUTPUT
-  job2:
-    needs: job1
-    runs-on: ubuntu-latest
-    strategy:
-      matrix: ${{ fromJSON(needs.job1.outputs.matrix) }}
-    steps:
-      - run: echo "Matrix - Project ${{ matrix.project }}, Config ${{ matrix.config }}"
+      - name: Print PR title
+        run: echo "${{ github.event.pull_request.title }}"
+      - name: Print PR labels
+        run: echo "${{ toJson(github.event.pull_request.labels) }}"
+      - name: Bug step
+        if: failure() && contains(github.event.pull_request.title,'fix')
+        run: echo "I am a bug fix"
+
+      - name: Sleep for 20 seconds
+        run: sleep 20  
+
+      - name: Failing step
+        run: echo exit 1
+      - name: I will be skipped
+        if: success()  
+        run: |
+          echo "I will print if previous steps succeed."
+      - name: I will execute if any previous step fails
+        if: failure()
+        run: |
+            echo "I will print if any previous step fails"
+      - name: I will execute always print, except when the workflow is cancelled.
+        if:  ${{ !cancelled() }}
+        run: |
+            echo "I will always print, except when the workflow is cancelled."
+      - name: I will execute when cancelled
+        if: cancelled()
+        run: |
+            echo "I will execute only when cancelled"
+    
+  
