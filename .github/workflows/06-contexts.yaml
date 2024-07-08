@@ -1,0 +1,51 @@
+name: 06 - Contexts
+run-name: "06 - Contexts | DEBUG - ${{ inputs.debug }}"
+on:
+    workflow_dispatch:
+      inputs:
+        debug:
+          type: boolean
+          default: false
+env: 
+ MY_WORKFLOW_VAR: 'workflow'
+ MY_OVERWRITTEN_VAR: 'workflow'
+jobs:
+  echo-data:
+    env: 
+        MY_JOB_VAR: 'Job'
+        MY_OVERWRITTEN_VAR: 'job'
+    runs-on: ubuntu-latest
+    steps:
+        - name: "Display Information"
+          run: |
+            echo "event_name: ${{github.event_name}}"
+            echo "Repo owner : ${{github.repository_owner}}"
+
+            echo "Ref: ${{github.Ref}}"
+            echo "Repo URL: ${{github.repositoryUrl}}"
+
+            echo "SHA: ${{github.SHA}}"
+            echo "sha: ${{github.sha}}"
+
+            echo "Actor: ${{github.Actor}}"
+
+            echo "Workflow: ${{github.Workflow}}"
+
+            echo "Run ID: ${{github.run_id}}"
+
+            echo "Run number: ${{github.run_number}}"
+        - name: "Retrieve Variable"
+          run: echo "MY_VAR value is ${{vars.MY_VAR}}"
+        - name: Print Env Variables
+          env: 
+              MY_OVERWRITTEN_VAR: 'Step'
+          run: |
+               echo "Workflow env: ${{env.MY_WORKFLOW_VAR}}
+               echo "Overwritten env:: ${{env.MY_OVERWRITTEN_VAR}}
+        - name: "Print Env Variables two" 
+       
+          run: |
+                echo "Workflow env: ${{env.MY_WORKFLOW_VAR}}
+                echo "Overwritten env:: ${{env.MY_OVERWRITTEN_VAR}}
+
+          
