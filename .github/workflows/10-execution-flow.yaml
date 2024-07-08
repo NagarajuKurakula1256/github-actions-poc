@@ -3,9 +3,9 @@
 
 name: 10 - Controlling the Execution Flow
 on:
-  workflow_dispatch:
+ workflow_dispatch:
    
- inputs:
+  inputs:
     pass-unit-tests:
         type: boolean
         default: false
@@ -22,7 +22,7 @@ jobs:
         - name: Running unit tests
           run: "Running tests..."
         - name: Failing tests
-          if: ${{pass-unit-tests}}==false
+          if: ${{inputs.pass-unit-tests}}==false
           run:  exit 1
   deploy-nonprod: 
     runs-on: ubuntu-latest
